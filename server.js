@@ -36,6 +36,13 @@ const server = app.listen(port, function () {
 
 const io = require("socket.io")(server);
 
+//::::::::::FORMA ABREVIADA::::::::::::::
+io.on("connection", function (socket) {
+  socket.on("cambiar_color", function (data) {
+    io.emit("color", data);
+  });
+});
+
 // RECIBIR MENSAJE::::::::::::::::::::::::::::::::::
 
 io.on("connection", function (socket) {

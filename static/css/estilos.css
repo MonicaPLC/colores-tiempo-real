@@ -1,10 +1,54 @@
 .container {
-  border: 1px solid black;
   width: 600px;
   border-radius: 20px;
+  text-align: center;
+  margin-top: 200px;
 }
 
 button {
   width: 100px;
-  height: 100px;
+  height: 50px;
+  margin: auto;
+  border: 1px solid black;
+}
+
+h4 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: lucida handwriting;
+  font-weight: bold;
+  background-color: darkcyan;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+#gradient {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+
+  border-radius: 5px;
+  color: white;
+}
+
+#green {
+  background-color: green;
+  border-radius: 5px;
+  color: white;
+}
+
+#blue {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+}
+
+#pink {
+  background-color: rosybrown;
+  border-radius: 5px;
+  color: white;
 }

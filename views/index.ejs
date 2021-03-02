@@ -19,14 +19,15 @@
 
   <body>
 
-
-
-
-
     <div class=container>
-      <button class="btn btn-secondary" id="btn1">Green</button>
-      <button class="btn btn-secondary" id="btn2">Blue</button>
-      <button class="btn btn-secondary" id="btn3">Pink</button>
+
+      <h4>Haz click en los botones para cambiar el color del fondo.</h4>
+      <button class="btnColor btn btn-success" id="green">Verde</button>
+      <button class="btnColor btn btn-primary" id="blue">Azul</button>
+      <button class="btnColor btn"              id="pink">Rosado</button>
+      <button class="btnColor btn btn-secondary" id=" radial-gradient(circle, rgba(246,91,91,1) 0%, rgba(109,245,124,0.9332107843137255) 100%)
+      ">Gradiente</button>
+      
 
     </div>
 
@@ -36,38 +37,70 @@
       //tengo que poner esta variable
       const socket = io('http://localhost:8000');
 
-      $("#btn1").on("click", function (data) {
-        socket.emit("green", { mensaje: "color green" })
-      });
+      function hablar(mensaje) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = mensaje;
+        window.speechSynthesis.speak(msg)
+      }
 
-      socket.on("respuesta_green", function (data) {
-        $("body").css("background-color", "green");
-        $("body").append('<audio id="audio"><source src="starw.mpeg" type="audio/mpeg"></audio>');
+      $(document).ready(function () {
 
-      });
+        $(".btnColor").on("click", function () {
+          let color = $(this).attr("id");
+          console.log(color);
+          socket.emit("cambiar_color", { color: color })
+          hablar(color)
+
+        })
+
+        socket.on("color", function (data) {
+          $("body").css("background", data.color)
+   
+        });
 
 
-
-      $("#btn2").on("click", function (data) {
-        socket.emit("blue", { mensaje: "color blue" })
-      });
-
-      socket.on("respuesta_blue", function (data) {
-        $("body").css("background-color", "blue");
-      });
-
-
-      $("#btn3").on("click", function (data) {
-        socket.emit("pink", { mensaje: "color pink" })
-      });
-
-      socket.on("respuesta_pink", function (data) {
-        $("body").css("background-color", "pink");
       });
 
 
 
 
+
+
+
+
+      /*
+            // al pinchar el botón enviar el mensaje socket
+            $("#btn1").on("click", function (data) {
+              socket.emit("green", { mensaje: "color green" })
+            });
+      
+            socket.on("respuesta_green", function (data) {
+              $("body").css("background-color", "green");
+              hablar("verde");
+            });
+      
+      
+            $("#btn2").on("click", function (data) {
+              socket.emit("blue", { mensaje: "color blue" })
+            });
+      
+            socket.on("respuesta_blue", function (data) {
+              $("body").css("background-color", "blue");
+              hablar("azul");
+      
+            });
+      
+      
+            $("#btn3").on("click", function (data) {
+              socket.emit("pink", { mensaje: "color pink" })
+            });
+      
+            socket.on("respuesta_pink", function (data) {
+              $("body").css("background-color", "pink");
+              hablar("rosado")
+            });
+      
+      */
     </script>
   </body>
 
